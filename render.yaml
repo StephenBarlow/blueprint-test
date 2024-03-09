@@ -1,0 +1,21 @@
+# This is a basic example blueprint for a Django web service and 
+# the PostgreSQL database it connects to.
+services:
+  - type: web # A Python web service named myapp running on a free instance
+    plan: free
+    name: myapp
+    runtime: python
+    repo: https://github.com/render-examples/django.git
+    buildCommand: "./build.sh"
+    startCommand: "python -m gunicorn myapp.asgi:application -k uvicorn.workers.UvicornWorker"
+    envVars:
+      - key: DATABASE_URL # Sets DATABASE_URL to the connection string of the myapp-db database
+        fromDatabase:
+          name: myapp-db
+          property: connectionString
+
+databases:
+  - name: myapp-db # A PostgreSQL database named myapp-db running on a free instance
+    plan: free
+    databaseName: myapp
+    user: myapp
