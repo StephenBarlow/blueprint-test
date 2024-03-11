@@ -17,9 +17,3 @@ services:
 databases:
   - name: django-app-db # A PostgreSQL database named django-app-db running on a free instance
     plan: free
-
-envVarGroups:
-  - name: dummy-group
-    envVars:
-      - key: DUMMY_VAR
-        value: foo
