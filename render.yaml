@@ -16,4 +16,4 @@ services:
 
 databases:
   - name: django-app-db # A PostgreSQL database named django-app-db running on a free instance
-    plan: free
+    plan: freep
