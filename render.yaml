@@ -13,8 +13,9 @@ services:
         fromDatabase:
           name: django-app-db
           property: connectionString
-  - type: static
+  - type: web
     name: render-assignment
+    runtime: static
 
 databases:
   - name: django-app-db # A PostgreSQL database named django-app-db running on a free instance
