@@ -17,6 +17,7 @@ services:
     name: render-assignment
     runtime: static
     staticPublishPath: ./build
+    branch: master
     envVars:
       - key: BLAH
         value: "blah"
