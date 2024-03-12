@@ -16,6 +16,10 @@ services:
   - type: web
     name: render-assignment
     runtime: static
+    staticPublishPath: ./build
+    envVars:
+      - key: BLAH
+        value: "blah"
 
 databases:
   - name: django-app-db # A PostgreSQL database named django-app-db running on a free instance
