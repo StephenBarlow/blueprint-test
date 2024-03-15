@@ -29,7 +29,7 @@ databases:
     plan: free
 
 envVarGroups:
-  - name: existing-group
+  - name: new-group
     envVars:
       - key: BLUFF
-        value: "guff"
+        sync: false
