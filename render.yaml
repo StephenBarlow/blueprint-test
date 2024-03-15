@@ -13,6 +13,8 @@ services:
         fromDatabase:
           name: django-app-db
           property: connectionString
+      - key: TOP_SECRET_KEY
+        sync: false
   - type: web
     name: render-assignment
     runtime: static
