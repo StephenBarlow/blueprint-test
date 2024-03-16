@@ -3,7 +3,7 @@
 services:
   - type: web # A Python web service named django-app running on a free instance
     plan: free
-    name: django-app
+    name: my-django-app
     runtime: python
     repo: https://github.com/render-examples/django.git
     buildCommand: "./build.sh"
@@ -13,7 +13,9 @@ services:
         fromDatabase:
           name: django-app-db
           property: connectionString
-      - key: TOP_SECRET_KEY
+      - key: STRIPE_API_KEY
+        sync: false
+      - key: SECRET_KEY
         sync: false
   - type: web
     name: render-assignment
@@ -25,11 +27,12 @@ services:
         value: "blah"
 
 databases:
-  - name: django-app-db # A PostgreSQL database named django-app-db running on a free instance
+  - name: my-django-app-db # A PostgreSQL database named django-app-db running on a free instance
     plan: free
 
 envVarGroups:
-  - name: new-group
+  - name: my-new-group
     envVars:
-      - key: BLUFF
-        sync: false
+      - key: API_ROOT_URL
+        value: "https://api.example.com"
+
