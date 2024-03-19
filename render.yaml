@@ -3,36 +3,25 @@
 services:
   - type: web # A Python web service named django-app running on a free instance
     plan: free
-    name: my-django-app
-    runtime: python
-    repo: https://github.com/render-examples/django.git
-    buildCommand: "./build.sh"
-    startCommand: "python -m gunicorn mysite.asgi:application -k uvicorn.workers.UvicornWorker"
+    name: my-node-app
+    runtime: node
+    repo: https://github.com/render-examples/express-hello-world.git
+    buildCommand: "yarn"
+    startCommand: "node app.js"
     envVars:
-      - key: DATABASE_URL # Sets DATABASE_URL to the connection string of the django-app-db database
-        fromDatabase:
-          name: django-app-db
-          property: connectionString
-      - key: STRIPE_API_KEY
-        sync: false
-      - key: SECRET_KEY
-        sync: false
-  - type: web
-    name: render-assignment
-    runtime: static
-    staticPublishPath: ./build
-    branch: master
-    envVars:
-      - key: BLAH
-        value: "blah"
-
-databases:
-  - name: my-django-app-db # A PostgreSQL database named django-app-db running on a free instance
-    plan: free
-
-envVarGroups:
-  - name: my-new-group
-    envVars:
-      - key: API_ROOT_URL
-        value: "https://api.example.com"
+      - key: METAGAME_HOST_PORT
+        fromService:
+          name: metagame
+          type: web
+          property: hostport
+      - key: METAGAME_HOST
+        fromService:
+          name: metagame
+          type: web
+          property: host
+      - key: METAGAME_PORT
+        fromService:
+          name: metagame
+          type: web
+          property: port
 
