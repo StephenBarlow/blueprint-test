@@ -9,6 +9,7 @@ services:
     buildCommand: "yarn"
     startCommand: "node app.js"
     buildFilter:
+      paths:
       ignoredPaths:
         - aaa/bbb
     envVars:
