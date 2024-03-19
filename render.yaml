@@ -11,17 +11,17 @@ services:
     envVars:
       - key: METAGAME_HOST_PORT
         fromService:
-          name: metagame-private
-          type: pserv
+          name: metagame-client
+          type: web
           property: hostport
       - key: METAGAME_HOST
         fromService:
-          name: metagame-private
-          type: pserv
+          name: metagame-client
+          type: web
           property: host
       - key: METAGAME_PORT
         fromService:
-          name: metagame-private
-          type: pserv
+          name: metagame-client
+          type: web
           property: port
 
