@@ -11,7 +11,7 @@ services:
     disk:
       name: my-node-app-disk
       mountPath: /var/data
-      size: 1
+      sizeGB: 1
     envVars:
       - key: METAGAME_HOST_PORT
         fromService:
