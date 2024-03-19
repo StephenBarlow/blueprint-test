@@ -9,8 +9,8 @@ services:
     buildCommand: "yarn"
     startCommand: "node app.js"
     buildFilter:
-      paths:
-        - foo/baz
+      ignoredPaths:
+        - aaa/bbb
     envVars:
       - key: METAGAME_HOST_PORT
         fromService:
