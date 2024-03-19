@@ -2,12 +2,15 @@
 # the PostgreSQL database it connects to.
 services:
   - type: web # A Python web service named django-app running on a free instance
-    plan: free
+    plan: starter
     name: my-node-app
     runtime: node
     repo: https://github.com/render-examples/express-hello-world.git
     buildCommand: "yarn"
     startCommand: "node app.js"
+    disk:
+      - name: my-node-app-disk
+        size: 1
     envVars:
       - key: METAGAME_HOST_PORT
         fromService:
