@@ -9,7 +9,7 @@ services:
     buildCommand: "yarn"
     startCommand: "node app.js"
     disk:
-      - name: my-node-app-disk
+      - name: mydisk
         size: 1
     envVars:
       - key: METAGAME_HOST_PORT
