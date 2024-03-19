@@ -8,7 +8,7 @@ services:
     repo: https://github.com/render-examples/express-hello-world.git
     buildCommand: "yarn"
     startCommand: "node app.js"
-    builtFilter:
+    buildFilter:
       paths:
         - foo/baz
       ignoredPaths:
