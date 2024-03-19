@@ -16,17 +16,17 @@ services:
     envVars:
       - key: METAGAME_HOST_PORT
         fromService:
-          name: metagame-client
+          name: metagame
           type: web
           property: hostport
       - key: METAGAME_HOST
         fromService:
-          name: metagame-client
+          name: metagame
           type: web
           property: host
       - key: METAGAME_PORT
         fromService:
-          name: metagame-client
+          name: metagame
           type: web
           property: port
 
