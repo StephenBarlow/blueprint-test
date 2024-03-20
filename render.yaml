@@ -11,3 +11,7 @@ services:
       - path: /*
         name: X-Frame-Options
         value: sameorigin
+    routes:
+      - type: redirect
+        source: /old
+        destination: /neww
