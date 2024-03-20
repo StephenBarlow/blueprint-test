@@ -2,26 +2,8 @@
 # the PostgreSQL database it connects to.
 services:
   - type: web # A Python web service named django-app running on a free instance
-    plan: starter
-    name: my-node-app
-    runtime: node
-    repo: https://github.com/render-examples/express-hello-world.git
-    buildCommand: "yarn"
-    startCommand: "node app.js"
-    envVars:
-      - key: METAGAME_HOST_PORT
-        fromService:
-          name: metagame
-          type: web
-          property: hostport
-      - key: METAGAME_HOST
-        fromService:
-          name: metagame
-          type: web
-          property: host
-      - key: METAGAME_PORT
-        fromService:
-          name: metagame
-          type: web
-          property: port
-
+    name: my-docusaurus
+    runtime: static
+    repo: https://github.com/StephenBarlow/docusaurus.git
+    buildCommand: "yarn install; yarn build"
+    staticPublishPath: ./build
