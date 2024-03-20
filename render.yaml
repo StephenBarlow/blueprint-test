@@ -10,7 +10,7 @@ services:
     headers:
       - path: /blah
         name: X-Frame-Options
-        value: oof
+        value: oofff
     routes:
       - type: redirect
         source: /old
