@@ -15,3 +15,6 @@ services:
       - type: redirect
         source: /old
         destination: /neww
+databases:
+  # db 1
+  - name: oopsie-no-defined
