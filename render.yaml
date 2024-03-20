@@ -7,3 +7,14 @@ services:
     repo: https://github.com/StephenBarlow/docusaurus.git
     buildCommand: "yarn install; yarn build"
     staticPublishPath: ./build
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: sameorigin
+    routes:
+      - type: redirect
+        source: /old
+        destination: /new
+      - type: rewrite
+        source: /a/*
+        destination: /a
