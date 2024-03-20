@@ -8,9 +8,9 @@ services:
     buildCommand: "yarn install; yarn build"
     staticPublishPath: ./build
     headers:
-      - path: /*
+      - path: /blah
         name: X-Frame-Options
-        value: sameorigin
+        value: oof
     routes:
       - type: redirect
         source: /old
