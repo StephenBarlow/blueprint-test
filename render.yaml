@@ -13,6 +13,9 @@ services:
         fromDatabase:
           name: django-app-db
           property: connectionString
+  - name: my-docusaurus
+    type: web
+    runtime: static
 
 databases:
   - name: another-db # A PostgreSQL database named django-app-db running on a free instance
