@@ -26,6 +26,8 @@ services:
   - name: my-docusaurus
     type: web
     runtime: node
+    buildCommand: "npm run build"
+    startCommand: "npm run serve"
 databases:
   - name: django-app-db # A PostgreSQL database named django-app-db running on a free instance
     plan: free
