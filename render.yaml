@@ -3,7 +3,7 @@
 services:
   - type: web # A Python web service named django-app running on a free instance
     plan: starter
-    name: django-app
+    name: service-one
     runtime: python
     repo: https://github.com/render-examples/django.git
     buildCommand: "./build.sh"
@@ -13,10 +13,15 @@ services:
         fromDatabase:
           name: django-app-db
           property: connectionString
-  - name: my-docusaurus
-    type: web
-    runtime: static
-
-databases:
-  - name: another-db # A PostgreSQL database named django-app-db running on a free instance
-    plan: free
+  - type: web # A Python web service named django-app running on a free instance
+    plan: starter
+    name: service-one
+    runtime: python
+    repo: https://github.com/render-examples/django.git
+    buildCommand: "./build.sh"
+    startCommand: "python -m gunicorn mysite.asgi:application -k uvicorn.workers.UvicornWorker"
+    envVars:
+      - key: DATABASE_URL # Sets DATABASE_URL to the connection string of the django-app-db database
+        fromDatabase:
+          name: django-app-db
+          property: connectionString
