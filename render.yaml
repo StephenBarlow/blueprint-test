@@ -28,7 +28,6 @@ services:
   region: oregon
   buildCommand: 'npm install '
   startCommand: npm start
-  numInstances: 2
   scaling:
     minInstances: 2
     maxInstances: 4
