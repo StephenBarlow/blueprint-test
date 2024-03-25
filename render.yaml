@@ -1,40 +1,37 @@
-# This is a basic example blueprint for a Django web service and 
-# the PostgreSQL database it connects to.
+# Exported from Render on 2024-03-25T20:30:09Z
+databases:
+- name: my-postgres
+  databaseName: my_postgres_vm9t
+  user: my_postgres_vm9t_user
+  plan: standard
+  region: oregon
+  ipAllowList:
+  - source: 0.0.0.0/0
+    description: everywhere
+  postgresMajorVersion: "15"
+  readReplicas:
+  - name: my-postgres-replica
 services:
-  - type: web # A Python web service named django-app running on a free instance
-    plan: starter
-    name: service-one
-    runtime: python
-    repo: https://github.com/render-examples/django.git
-    buildCommand: "./build.sh"
-    startCommand: "python -m gunicorn mysite.asgi:application -k uvicorn.workers.UvicornWorker"
-    envVars:
-      - key: DATABASE_URL # Sets DATABASE_URL to the connection string of the django-app-db database
-        fromDatabase:
-          name: django-app-db
-          property: connectionString
-  - type: web # A Python web service named django-app running on a free instance
-    plan: starter
-    name: service-one
-    runtime: python
-    repo: https://github.com/render-examples/django.git
-    buildCommand: "./build.sh"
-    startCommand: "python -m gunicorn mysite.asgi:application -k uvicorn.workers.UvicornWorker"
-    envVars:
-      - key: DATABASE_URL # Sets DATABASE_URL to the connection string of the django-app-db database
-        fromDatabase:
-          name: django-app-db
-          property: connectionString
-  - type: web # A Python web service named django-app running on a free instance
-    plan: starter
-    name: service-one
-    runtime: python
-    repo: https://github.com/render-examples/django.git
-    buildCommand: "./build.sh"
-    startCommand: "python -m gunicorn mysite.asgi:application -k uvicorn.workers.UvicornWorker"
-    envVars:
-      - key: DATABASE_URL # Sets DATABASE_URL to the connection string of the django-app-db database
-        fromDatabase:
-          name: django-app-db
-          property: connectionString
-
+- type: web
+  name: my-web-service
+  runtime: node
+  repo: https://github.com/StephenBarlow/metagame
+  branch: master
+  plan: starter
+  envVars:
+  - key: DATABASE_URL
+    sync: false
+  - key: NODE_ENV
+    sync: false
+  - key: NODE_VERSION
+    sync: false
+  region: oregon
+  buildCommand: 'npm install '
+  startCommand: npm start
+  numInstances: 2
+  scaling:
+    minInstances: 2
+    maxInstances: 4
+    targetCPUPercent: 60
+    targetMemoryPercent: 60
+version: "1"
