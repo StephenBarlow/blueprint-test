@@ -22,9 +22,6 @@ services:
     startCommand: bundle exec ruby main.rb
     autoDeploy: false # Disable automatic deploys
     maxShutdownDelaySeconds: 120 # Increase graceful shutdown period. Default: 30, Max: 300
-    domains: # Custom domains
-      - example.com
-      - www.example.org
     envVars: # Environment variables
       - key: API_BASE_URL
         value: https://api.example.com # Hardcoded value
@@ -145,6 +142,7 @@ databases:
 
   # A database with a read replica
   - name: elephant
+    plan: pro
     databaseName: mydb # Optional (Render may add a suffix)
     user: adrian # Optional
     ipAllowList: # Optional (defaults to allow all)
