@@ -8,23 +8,6 @@ projects:
       protection: enabled
     services:
     - type: web
-      name: db-admin
-      runtime: image
-      image:
-        url: docker.io/ankane/pghero:latest
-      plan: free
-      envVars:
-      - key: WEB_CONCURRENCY
-        sync: false
-      - key: PGHERO_PASSWORD
-        sync: false
-      - key: PGHERO_USERNAME
-        sync: false
-      - key: DATABASE_URL
-        sync: false
-      region: oregon
-      autoDeployTrigger: commit
-    - type: web
       name: prod-web
       runtime: node
       repo: https://github.com/StephenBarlow/metagame
