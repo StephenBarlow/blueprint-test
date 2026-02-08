@@ -1,39 +1,65 @@
-# This is a basic example blueprint for a Django web service and 
-# the PostgreSQL database it connects to.
-services:
-  - type: web # A Python web service named django-app running on a free instance
-    plan: free
-    name: django-app
-    runtime: python
-    repo: https://github.com/render-examples/django.git
-    buildCommand: "./build.sh"
-    startCommand: "python -m gunicorn mysite.asgi:application -k uvicorn.workers.UvicornWorker"
-    envVars:
-      - key: DATABASE_URL # Sets DATABASE_URL to the connection string of the django-app-db database
-        fromDatabase:
-          name: django-app-db
-          property: connectionString
-      - key: TOP_SECRET_KEY
+# Exported from Render on 2026-02-08T22:10:18Z
+version: "1"
+projects:
+- name: Main Platform
+  environments:
+  - name: Production
+    permissions:
+      protection: enabled
+    services:
+    - type: web
+      name: db-admin
+      runtime: image
+      image:
+        url: docker.io/ankane/pghero:latest
+      plan: free
+      envVars:
+      - key: WEB_CONCURRENCY
         sync: false
-  - type: web
-    name: render-assignment
-    runtime: static
-    staticPublishPath: ./build
-    branch: master
-    envVars:
+      - key: PGHERO_PASSWORD
+        sync: false
+      - key: PGHERO_USERNAME
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      region: oregon
+      autoDeployTrigger: commit
+    - type: web
+      name: prod-web
+      runtime: node
+      repo: https://github.com/StephenBarlow/metagame
+      plan: starter
+      envVars:
       - key: BLAH
-        value: "blah"
-  - name: my-docusaurus
-    type: web
-    runtime: node
-    buildCommand: "npm run build"
-    startCommand: "npm run serve"
-databases:
-  - name: django-app-db # A PostgreSQL database named django-app-db running on a free instance
-    plan: free
-
-envVarGroups:
-  - name: new-group
-    envVars:
-      - key: BLUFF
         sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: NODE_ENV
+        sync: false
+      - key: NODE_VERSION
+        sync: false
+      region: oregon
+      buildCommand: 'npm install '
+      startCommand: npm start
+      autoDeployTrigger: commit
+      previews:
+        generation: automatic
+    - type: cron
+      name: my-cron-job
+      runtime: node
+      repo: https://github.com/StephenBarlow/metagame
+      plan: starter
+      region: oregon
+      buildCommand: npinstall
+      startCommand: echo "hello"
+      schedule: '*/3000 * * * *'
+      autoDeployTrigger: commit
+    databases:
+    - name: prod-postgres
+      databaseName: my_postgres_vm9t
+      user: my_postgres_vm9t_user
+      region: oregon
+      ipAllowList:
+      - source: 0.0.0.0/0
+        description: everywhere
+      postgresMajorVersion: "16"
